@@ -1,12 +1,15 @@
-const MoviesGrid = ({ data }) => {
-    if (data.Response === "True") {
-        <h1>Mostrar resultados</h1>
-    } else {
-        <h1>Sin coincidencias</h1>
-    }
+import MovieCard from "./movieCard"
+
+const MoviesGrid = ({ movies }) => {
+
+    const cards = movies.map(movie => <MovieCard title={movie.Title} poster={movie.Poster} key={movie.imdbID
+    } />)
+
+    return (
+        <>
+            {cards}
+        </>
+    )
 }
-
-
-
 
 export default MoviesGrid

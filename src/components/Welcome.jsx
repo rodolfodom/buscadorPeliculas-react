@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
 
 
-const StyledMain = styled.main`
+const StyledHeader = styled.header`
     background-color: #f16868;
     transition: all 500ms ease-in-out;
 
@@ -73,38 +73,35 @@ const StyledMain = styled.main`
 
 
 
-const Welcome = ({ data, setQuery, handleSubmit }) => {
+const Welcome = ({ data, handleSubmit }) => {
 
-    const handleChange = (e) => {
-        setQuery(e.target.value)
-    }
 
 
     if (data === null) {
         return (
-            <StyledMain>
+            <StyledHeader>
                 <h1>Bievenido</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="movieQuery">Busca tu pelicula</label>
-                        <input type="text" name="movieQuery" onChange={(e) => { handleChange(e) }} />
+                        <input type="text" name="movieQuery" />
                         <button type="submit">Buscar</button>
                     </div>
                 </form>
-            </StyledMain>
+            </StyledHeader>
         )
     } else {
         return (
-            <StyledMain $isData>
+            <StyledHeader $isData>
                 <h1>Bievenido</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="movieQuery">Busca tu pelicula</label>
-                        <input type="text" name="movieQuery" onChange={(e) => { handleChange(e) }} />
+                        <input type="text" name="movieQuery" id="textInput" />
                         <button type="submit">Buscar</button>
                     </div>
                 </form>
-            </StyledMain>
+            </StyledHeader>
         )
     }
 

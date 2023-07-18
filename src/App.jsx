@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { styled } from 'styled-components';
+import React, { useEffect, useState } from 'react';
 import Welcome from './components/Welcome';
 import getData from './logic/getData';
 import CONSTATNTS from './logic/constants';
-import MoviesGrid from './components/moviesGrid';
+import ResultsContainer from './components/resultsContainer';
 
 function App() {
 
@@ -11,17 +10,29 @@ function App() {
   const [query, setQuery] = useState("")
   const [lastQuery, setLastQuery] = useState("")
 
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (lastQuery === query) return
-    setLastQuery(query)
-    setData(await getData(CONSTATNTS.API_ENDPOINT + query))
+    setQuery(e.target.movieQuery.value)
   }
+
+  useEffect(() => {
+
+    if (query === "") return
+
+    (async function () {
+      setData(await getData(CONSTATNTS.API_ENDPOINT + query))
+    })();
+
+
+
+  }, [query])
+
 
   return (
     <>
-      <Welcome data={data} setQuery={setQuery} handleSubmit={handleSubmit}></Welcome>
-      {data != null && <MoviesGrid data={data} />}
+      <Welcome data={data} handleSubmit={handleSubmit}></Welcome>
+      {data != null && <ResultsContainer data={data} />}
     </>
 
   )
